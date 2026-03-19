@@ -48,7 +48,11 @@ export default function Home() {
       const res = await fetch(`/api/transcript?videoId=${videoId}`);
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
-      setTranscript(data.transcript);
+      const text =
+        typeof data === "string"
+          ? data
+          : (data?.transcript ?? data?.data?.transcript ?? "");
+      setTranscript(typeof text === "string" ? text : String(text ?? ""));
     } catch {
       setError("Could not fetch transcript. Try pasting manually.");
     } finally {
@@ -157,6 +161,7 @@ export default function Home() {
                     className="flex-1 px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-violet-600/50 focus:border-violet-600 transition-all"
                   />
                   <button
+                    type="button"
                     onClick={fetchTranscript}
                     disabled={isFetching || !youtubeUrl}
                     className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed text-zinc-200 rounded-lg transition-colors text-sm font-medium"
