@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { YoutubeTranscript } from "youtube-transcript";
 
 export async function GET(request: NextRequest) {
   const videoId = request.nextUrl.searchParams.get("videoId");
@@ -7,29 +6,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Video ID required" }, { status: 400 });
   }
   try {
-    const transcriptItems = await YoutubeTranscript.fetchTranscript(videoId);
-    const transcript = transcriptItems.map((item) => item.text).join(" ");
-    return NextResponse.json({ transcript });
+    const res = await fetch(`http://localhost:3001/?videoId=${videoId}`);
+    const data = await res.json();
+    if (data.error) {
+      return NextResponse.json({ error: data.error }, { status: 404 });
+    }
+    return NextResponse.json(data);
   } catch {
-    return NextResponse.json(
-      { error: "Could not fetch transcript. Try pasting manually." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Transcript service unavailable. Paste transcript manually." }, { status: 500 });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
