@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "ContentFlow - Transform Content in 2 Minutes",
-  description: "Transform YouTube transcripts into blog posts, Twitter threads, and YouTube Shorts scripts with AI",
+  title: "ContentFlow — Transform Any Transcript Into 3 Content Formats",
+  description: "Paste any video transcript and get a publish-ready blog post, Twitter thread, and YouTube Shorts script in under 2 minutes. Free to try.",
+  openGraph: {
+    title: "ContentFlow — One Transcript. Three Formats. Two Minutes.",
+    description: "AI-powered content repurposing. Paste a transcript, get a blog post, Twitter thread, and Shorts script instantly.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ContentFlow — One Transcript. Three Formats. Two Minutes.",
+    description: "AI-powered content repurposing. Paste a transcript, get a blog post, Twitter thread, and Shorts script instantly.",
+  },
 };
 
 export default function RootLayout({
@@ -24,9 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+      </head>
+      <body className="antialiased">
         {children}
       </body>
     </html>
