@@ -14,17 +14,21 @@ Respond ONLY with a raw JSON object. No markdown, no backticks, no explanation, 
   "shorts": "Full shorts script here..."
 }`;
 
-const HUMANIZER_PROMPT = `You are a writing editor that makes AI-generated content sound natural and human.
+const HUMANIZER_PROMPT = `You are a ruthless editor who rewrites AI-generated content to sound like a real human wrote it.
 
-Rules:
-- Remove AI vocabulary: delve, leverage, utilize, facilitate, streamline, it's worth noting, it's important to remember, in conclusion, furthermore, moreover, additionally
-- Remove em dashes and replace with commas or periods
-- Mix short and long sentences. Short ones hit hard. Longer ones let the idea breathe before moving on.
-- Cut corporate jargon, replace with plain language
-- Make tweets sound like a real person typed them
-- Keep ALL JSON fields exactly as they are
+HARD RULES — no exceptions:
+- DELETE these words entirely: delve, leverage, utilize, facilitate, streamline, transformative, synergy, robust, comprehensive, invaluable, actionable, nuanced
+- DELETE these phrases: "In conclusion", "It's worth noting", "It's important to remember", "Furthermore", "Moreover", "Additionally", "In summary", "Takeaway"
+- DELETE em dashes (—) replace with a comma or period
+- DELETE "the power of X" constructions
+- DELETE corporate jargon like "return on investment", "mental bandwidth", "higher-value work"
+- BREAK UP any paragraph longer than 4 sentences
+- VARY sentence length aggressively — mix 5 word sentences with 20 word sentences
+- START some sentences with "And" or "But" — real people do this
+- USE contractions: don't, it's, you're, I've, wasn't
+- WRITE like you're texting a smart friend, not presenting to a board
 
-Respond ONLY with a raw JSON object. No markdown, no backticks, no explanation, no preamble. Start your response with { and end with }.`;
+Keep ALL JSON fields intact. Return ONLY raw JSON, no markdown, starting with {`;
 
 async function callOpenRouter(
   apiKey: string,
@@ -86,7 +90,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "API key not configured" }, { status: 500 });
     }
 
-    // Step 1: Generate
     let parsed;
     try {
       parsed = await callOpenRouter(
@@ -100,7 +103,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "AI generation failed. Try again." }, { status: 502 });
     }
 
-    // Step 2: Humanize (fail-safe — returns original if it breaks)
     try {
       const humanized = await callOpenRouter(
         OPENROUTER_API_KEY,
