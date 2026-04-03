@@ -13,10 +13,11 @@ interface GeneratedContent {
 interface IdeaItem {
   id: number;
   idea: string;
-  category: string;
+  category: "Revenue" | "Growth" | "Product" | "Content" | "Operations" | "Learning" | "Marketing" | "Strategy" | "Other";
   impact: number;
   effort: number;
   urgency: number;
+  confidence: number;
   priority_score: number;
   next_step: string;
   why: string;
@@ -161,7 +162,11 @@ export default function Home() {
   // Generate / Extract
   const handleGenerate = async () => {
     if (!transcript.trim()) { setError("Please paste content first"); return; }
-    if (!user) { setShowAuthModal(true); return; }
+    if (!user) {
+      const guestUsed = localStorage.getItem("guest_used");
+      if (guestUsed) { setShowAuthModal(true); return; }
+      localStorage.setItem("guest_used", "true");
+    }
     if (remaining !== null && remaining <= 0 && plan === "free") {
       setError("Daily limit reached. Upgrade to Pro for unlimited.");
       return;
@@ -414,7 +419,7 @@ export default function Home() {
                   {isLoading ? (
                     <><LoaderIcon className="w-4 h-4" /> {mode === "repurpose" ? "Generating content..." : "Extracting ideas..."}</>
                   ) : !user ? (
-                    <>Sign in to {mode === "repurpose" ? "Generate" : "Extract"}</>
+                    <>{typeof window !== "undefined" && localStorage.getItem("guest_used") ? "Sign in to Generate More" : "Try Free — No Sign In Required"}</>
                   ) : mode === "repurpose" ? (
                     <><ZapIcon className="w-4 h-4" /> Generate 3 Formats</>
                   ) : (
@@ -426,7 +431,7 @@ export default function Home() {
                   {user ? (
                     plan === "pro" ? "Unlimited generations ✦" :
                     remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining today · <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400">Upgrade for unlimited</a></> : null
-                  ) : <>Sign in to start generating · 3 free per day</>}
+                  ) : <>{typeof window !== "undefined" && localStorage.getItem("guest_used") ? <>Sign in for 3 free/day · <button onClick={() => setShowAuthModal(true)} className="text-amber-500 hover:text-amber-400">Create free account</button></> : <>Try 1 generation free — no sign in needed</>}</>}
                 </p>
               </div>
 
@@ -481,6 +486,7 @@ export default function Home() {
                                   <div className="flex items-center gap-1.5"><span className="text-[10px] text-zinc-600 w-9">Impact</span><ScoreBar value={idea.impact} color="#f59e0b" /></div>
                                   <div className="flex items-center gap-1.5"><span className="text-[10px] text-zinc-600 w-9">Effort</span><ScoreBar value={idea.effort} color="#8b5cf6" /></div>
                                   <div className="flex items-center gap-1.5"><span className="text-[10px] text-zinc-600 w-9">Urgent</span><ScoreBar value={idea.urgency} color="#ef4444" /></div>
+                                  <div className="flex items-center gap-1.5"><span className="text-[10px] text-zinc-600 w-9">Confid.</span><ScoreBar value={idea.confidence} color="#22c55e" /></div>
                                 </div>
                                 <div className="text-xs text-amber-300/70 bg-amber-500/[0.05] border border-amber-500/10 px-3 py-2 rounded-lg">
                                   <span className="font-bold text-amber-400">Next →</span> {idea.next_step}
