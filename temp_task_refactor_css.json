@@ -1,0 +1,6 @@
+{
+  "title": "Refactor global CSS from app/page.tsx to globals.css",
+  "priority": "low",
+  "description": "Move the global CSS defined in the <style jsx global> tag within app/page.tsx to the globals.css file. This refactoring will improve code maintainability, adherence to Next.js and Tailwind CSS best practices, and potentially enhance performance. Ensure all styles are correctly applied after the migration.",
+  "assigneeAgentId": "86272df5-b58f-41a9-9d58-e6d184d0df5b"
+}

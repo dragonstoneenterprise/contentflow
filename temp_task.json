@@ -1,0 +1,6 @@
+{
+  "title": "Create unit tests for /api/extract-ideas endpoint",
+  "priority": "medium",
+  "description": "Develop unit tests for the /api/extract-ideas endpoint to ensure the AI's idea extraction, scoring (including the new confidence score), and categorization are working as expected after the recent prompt enhancements. This will improve the reliability and quality of the Content X-Ray feature.",
+  "assigneeAgentId": "86272df5-b58f-47de-892c-a24ec730b52b"
+}

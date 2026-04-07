@@ -89,7 +89,7 @@ export default function Home() {
           setPlan(profile.plan);
           const today = new Date().toISOString().split("T")[0];
           const usage = profile.last_reset === today ? profile.daily_usage : 0;
-          const limit = profile.plan === "pro" ? 999999 : 3;
+          const limit = profile.plan === "pro" ? 999999 : 7;
           setRemaining(Math.max(0, limit - usage));
         }
       }
@@ -163,9 +163,9 @@ export default function Home() {
   const handleGenerate = async () => {
     if (!transcript.trim()) { setError("Please paste content first"); return; }
     if (!user) {
-      const guestUsed = localStorage.getItem("guest_used");
-      if (guestUsed) { setShowAuthModal(true); return; }
-      localStorage.setItem("guest_used", "true");
+      let guestUses = parseInt(localStorage.getItem("guest_uses") || "0");
+      if (guestUses >= 7) { setShowAuthModal(true); return; }
+      localStorage.setItem("guest_uses", (guestUses + 1).toString());
     }
     if (remaining !== null && remaining <= 0 && plan === "free") {
       setError("Daily limit reached. Upgrade to Pro for unlimited.");
@@ -414,10 +414,10 @@ export default function Home() {
                 <button
                   onClick={handleGenerate}
                   disabled={isLoading || !transcript.trim()}
-                  className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 animate-pulse-glow disabled:animate-none text-sm tracking-wide"
+                  className={`w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 ${isLoading ? "" : "animate-pulse-glow"} text-sm tracking-wide`}
                 >
                   {isLoading ? (
-                    <><LoaderIcon className="w-4 h-4" /> {mode === "repurpose" ? "Generating content..." : "Extracting ideas..."}</>
+                    <><LoaderIcon className="w-4 h-4" /> <span className="text-sm font-semibold">{mode === "repurpose" ? "Generating content..." : "Extracting ideas..."}</span></>
                   ) : !user ? (
                     <>{typeof window !== "undefined" && localStorage.getItem("guest_used") ? "Sign in to Generate More" : "Try Free — No Sign In Required"}</>
                   ) : mode === "repurpose" ? (
@@ -431,8 +431,7 @@ export default function Home() {
                   {user ? (
                     plan === "pro" ? "Unlimited generations ✦" :
                     remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining today · <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400">Upgrade for unlimited</a></> : null
-                  ) : <>{typeof window !== "undefined" && localStorage.getItem("guest_used") ? <>Sign in for 3 free/day · <button onClick={() => setShowAuthModal(true)} className="text-amber-500 hover:text-amber-400">Create free account</button></> : <>Try 1 generation free — no sign in needed</>}</>}
-                </p>
+                  ) : <>{typeof window !== "undefined" && parseInt(localStorage.getItem("guest_uses") || "0") >= 7 ? <>Sign in for 7 free/day · <button onClick={() => setShowAuthModal(true)} className="text-amber-500 hover:text-amber-400">Create free account</button></> : <>Try up to 7 generations free — no sign in needed</>}</>}                </p>
               </div>
 
               {/* RIGHT: Output */}
