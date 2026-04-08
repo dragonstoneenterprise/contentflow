@@ -150,6 +150,23 @@ export default function Home() {
     }
   };
 
+  const handleUpgrade = async () => {
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        setError(data.error || "Failed to create checkout session.");
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to initiate upgrade.";
+      setError(message);
+    }
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
     setShowUserMenu(false);
@@ -287,10 +304,10 @@ export default function Home() {
                   <span className="text-xs font-mono text-amber-500">Pro ✦</span>
                 )}
                 {plan === "free" && (
-                  <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer"
+                  <button onClick={handleUpgrade}
                     className="px-4 py-1.5 text-sm font-semibold text-amber-400 border border-amber-500/30 rounded-full hover:bg-amber-500/10 transition-all duration-200">
                     Go Pro
-                  </a>
+                  </button>
                 )}
                 <div style={{display:"flex",alignItems:"center",gap:"10px"}}><div style={{width:"32px",height:"32px",borderRadius:"50%",background:"linear-gradient(135deg,#f59e0b,#ea580c)",display:"flex",alignItems:"center",justifyContent:"center",color:"white",fontSize:"12px",fontWeight:"bold"}}>{userInitial}</div><a href="/signout" style={{fontSize:"12px",color:"#a1a1aa",textDecoration:"none"}}>Logout</a></div>
               </>
@@ -430,7 +447,7 @@ export default function Home() {
                 <p className="text-center text-[11px] text-zinc-600">
                   {user ? (
                     plan === "pro" ? "Unlimited generations ✦" :
-                    remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining today · <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400">Upgrade for unlimited</a></> : null
+                    remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining today · <button onClick={handleUpgrade} className="text-amber-500 hover:text-amber-400">Upgrade for unlimited</button></> : null
                   ) : <>{typeof window !== "undefined" && parseInt(localStorage.getItem("guest_uses") || "0") >= 7 ? <>Sign in for 7 free/day · <button onClick={() => setShowAuthModal(true)} className="text-amber-500 hover:text-amber-400">Create free account</button></> : <>Try up to 7 generations free — no sign in needed</>}</>}                </p>
               </div>
 
@@ -610,9 +627,9 @@ export default function Home() {
                 <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> Priority processing</li>
                 <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> All formats included</li>
               </ul>
-              <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="block w-full py-2.5 text-center bg-gradient-to-r from-amber-500 to-orange-600 text-white text-sm font-bold rounded-lg hover:from-amber-400 hover:to-orange-500 transition-all shadow-lg shadow-amber-500/15">
+              <button onClick={handleUpgrade} className="block w-full py-2.5 text-center bg-gradient-to-r from-amber-500 to-orange-600 text-white text-sm font-bold rounded-lg hover:from-amber-400 hover:to-orange-500 transition-all shadow-lg shadow-amber-500/15">
                 Get Pro
-              </a>
+              </button>
             </div>
           </div>
         </section>
