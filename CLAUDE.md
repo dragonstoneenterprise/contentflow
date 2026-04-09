@@ -91,3 +91,27 @@ A small Node.js ESM script for testing YouTube transcript fetching via the `yout
 
 - **Run:** `node test-transcript.mjs` from `yt-test/`
 - **Install deps:** `npm install` from `yt-test/`
+
+---
+
+## Business Context
+- **Dragonstone Enterprises** — AI digital products (ContentFlow, CallReady)
+- **Cryptic Dragon LLC** — Apple product resale (BFMR/Amazon/eBay), California LLC
+- **Email:** contact@dragonstone.online
+
+## Other Products
+- **CallReady** — AI earnings call prep, live at callready-pi.vercel.app ($49/$297/$497/mo)
+  - Needs: rename "Try Demo" → "Book a Demo", Loom demo recording
+- **ContentFlow model note:** replace `minimax/minimax-m2.1` with Gemini Flash Lite when fixing v2
+
+## AI Stack
+- OpenRouter for all AI calls
+- Models: Gemini Flash (scanning), Claude Opus (confirmation)
+- Supabase for auth + usage tracking (prod only)
+
+## WSL Machine (Brainy — separate Windows machine)
+- Brainy/OpenClaw at ~/.openclaw/
+- Paper trades DB: ~/.openclaw/trading/paper_trades_v2.db
+- Polymarket pipeline v2: cron every 2h, paper trading mode
+- Agents: Trading Scout, ContentFlow (!content), Felix (!felix)
+- Env vars in ~/.bashrc and ~/.env
