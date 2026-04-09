@@ -292,7 +292,7 @@ export default function Home() {
             <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
               <ZapIcon className="w-5 h-5 text-white" />
             </div>
-            <span className="text-lg font-bold tracking-tight text-white">ContentFlow</span>
+            <span className="text-lg font-bold tracking-tight text-white">Snipflow</span>
           </div>
           <div className="flex items-center gap-3">
             {user ? (
@@ -638,7 +638,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-5 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center"><ZapIcon className="w-3.5 h-3.5 text-white" /></div>
-              <span className="text-xs font-semibold text-zinc-500">ContentFlow</span>
+              <span className="text-xs font-semibold text-zinc-500">Snipflow</span>
             </div>
             <span className="text-[11px] text-zinc-700">by Dragonstone Enterprises</span>
           </div>

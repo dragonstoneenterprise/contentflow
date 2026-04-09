@@ -12,9 +12,9 @@ Here's how to process the content:
     *   **EFFORT (1-10)**: How much work, time, or resources are required to implement this? (1=very easy, 10=very massive undertaking)
     *   **URGENCY (1-10)**: How time-sensitive is this idea? Does it need to be done soon to capture an opportunity or avoid a problem? (1=not urgent, 10=immediate action needed)
     *   **CONFIDENCE (1-10)**: How certain are you in the accuracy and relevance of this extracted idea and its assessments based on the provided content? (1=low certainty, 10=high certainty)
-3.  **Calculate PRIORITY SCORE**: Use the formula: `(Impact × 2 + Urgency × 1.5 + Confidence) / Effort`.
-4.  **Sort**: Order the ideas by their `priority_score` in descending order (highest priority first).
-5.  **Develop Next Step**: For each idea, provide a concrete, specific, and actionable `next_step`. Suggest specific tools or methods if appropriate.
+3.  **Calculate PRIORITY SCORE**: Use the formula: '(Impact × 2 + Urgency × 1.5 + Confidence) / Effort'.
+4.  **Sort**: Order the ideas by their 'priority_score' in descending order (highest priority first).
+5.  **Develop Next Step**: For each idea, provide a concrete, specific, and actionable 'next_step'. Suggest specific tools or methods if appropriate.
 6.  **Explain "Why"**: Briefly explain in one sentence why each idea matters or its potential benefit.
 
 Respond ONLY with valid JSON. Do not include any markdown, backticks, or preamble. Your output must strictly adhere to this JSON structure:

@@ -1,4 +1,4 @@
-# ContentFlow + Supabase Auth — Setup Guide
+# Snipflow + Supabase Auth — Setup Guide
 
 ## Files Overview
 

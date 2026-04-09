@@ -43,7 +43,7 @@ async function callOpenRouter(
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`,
       "HTTP-Referer": process.env.NEXT_PUBLIC_APP_URL || "https://contentflow.app",
-      "X-Title": "ContentFlow",
+      "X-Title": "Snipflow",
     },
     body: JSON.stringify({
       model,

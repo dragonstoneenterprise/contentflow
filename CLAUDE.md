@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## This project: ContentFlow (production)
+## This project: Snipflow (production)
 Next.js 14 app with Supabase auth and OpenRouter AI. Deployed on Railway (auto-deploys on `git push`).
 
 - **Dev:** `npm run dev`
@@ -35,10 +35,10 @@ UPDATE profiles SET plan = 'pro' WHERE email = 'user@email.com';
 
 ---
 
-## v2 prototype: ~/Desktop/Projects/ContentFlow/contentflow
+## v2 prototype: ~/Desktop/Projects/Snipflow/contentflow
 Next.js 16 / React 19 version. No Supabase — auth-free with usage gating via `localStorage`. Deployed to Vercel.
 
-- **Dev:** `npm run dev` from `~/Desktop/Projects/ContentFlow/contentflow/`
+- **Dev:** `npm run dev` from `~/Desktop/Projects/Snipflow/contentflow/`
 - **Build:** `npm run build`
 - **Lint:** `eslint`
 - **Env vars required:** `OPENROUTER_API_KEY` (also accepts `OPENAI_API_KEY` as fallback)
