@@ -123,7 +123,6 @@ export default function Home() {
     if (error) setAuthError(error.message);
   };
 
-  const handleEmailAuth = async () => {
     setAuthError(null);
     setAuthSubmitting(true);
     try {
