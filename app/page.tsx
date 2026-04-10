@@ -358,11 +358,12 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-white/[0.06]" style={{ background: 'rgba(8,8,8,0.85)' }}>
         <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
-              <ZapIcon className="w-4 h-4 text-white" />
+          <div style={{textAlign:'center'}}>
+            <div>
+              <span style={{color:'#ff4500', fontSize:'22px', fontWeight:'bold', letterSpacing:'3px'}}>SNIP</span>
+              <span style={{color:'#ffffff', fontSize:'22px', fontWeight:'bold', letterSpacing:'3px'}}>FLOW</span>
             </div>
-            <span className="text-base font-bold tracking-tight hero-title">Snipflow</span>
+            <div style={{color:'#888888', fontSize:'11px', letterSpacing:'2px', marginTop:'5px'}}>BY DRAGONSTONE</div>
           </div>
 
           {/* Nav Links */}
@@ -904,11 +905,12 @@ export default function Home() {
       {/* ─── FOOTER ─── */}
       <footer className="border-t border-white/[0.06] py-10 px-5">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center">
-              <ZapIcon className="w-3.5 h-3.5 text-white" />
+          <div style={{textAlign:'center'}}>
+            <div>
+              <span style={{color:'#ff4500', fontSize:'22px', fontWeight:'bold', letterSpacing:'3px'}}>SNIP</span>
+              <span style={{color:'#ffffff', fontSize:'22px', fontWeight:'bold', letterSpacing:'3px'}}>FLOW</span>
             </div>
-            <span className="text-sm font-semibold hero-title">Snipflow</span>
+            <div style={{color:'#888888', fontSize:'11px', letterSpacing:'2px', marginTop:'5px'}}>BY DRAGONSTONE</div>
           </div>
           <div className="flex items-center gap-6 text-xs text-zinc-500">
             <a href="#features" className="hover:text-zinc-300 transition-colors">Features</a>
