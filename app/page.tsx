@@ -373,6 +373,7 @@ export default function Home() {
                 {link}
               </a>
             ))}
+            <a href="/affiliates" className="text-sm text-zinc-400 hover:text-white transition-colors">Affiliates</a>
           </div>
 
           {/* Auth */}
