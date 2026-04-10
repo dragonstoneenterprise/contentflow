@@ -7,7 +7,7 @@ export default function AffiliatesPage() {
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
         .hero-title { font-family: 'Syne', sans-serif; }
         .gradient-text {
-          background: linear-gradient(135deg, #f59e0b, #f97316, #fbbf24);
+          background: linear-gradient(135deg, #ff4500, #ff6a00);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -17,7 +17,7 @@ export default function AffiliatesPage() {
           -webkit-backdrop-filter: blur(20px);
         }
         .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-2px); border-color: rgba(245, 158, 11, 0.3); }
+        .card-hover:hover { transform: translateY(-2px); border-color: rgba(255, 69, 0, 0.3); }
         @keyframes fade-up {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
@@ -31,8 +31,8 @@ export default function AffiliatesPage() {
 
       {/* ─── AMBIENT BACKGROUND ─── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full opacity-[0.03] blur-[120px]" style={{ background: '#f59e0b' }} />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full opacity-[0.03] blur-[100px]" style={{ background: '#f97316' }} />
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full opacity-[0.03] blur-[120px]" style={{ background: '#ff4500' }} />
+        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full opacity-[0.03] blur-[100px]" style={{ background: '#ff6a00' }} />
       </div>
 
       {/* ─── NAVBAR ─── */}
@@ -59,7 +59,7 @@ export default function AffiliatesPage() {
           {/* CTA */}
           <div className="flex items-center gap-3">
             <a href="mailto:affiliates@dragonstoneenterprises.com"
-              className="px-4 py-2 text-sm font-semibold bg-amber-500 hover:bg-amber-400 text-black rounded-full transition-all">
+              className="px-4 py-2 text-sm font-semibold bg-[#ff4500] hover:bg-[#ff6a00] text-black rounded-full transition-all">
               Apply Now
             </a>
           </div>
@@ -71,8 +71,8 @@ export default function AffiliatesPage() {
         {/* ─── HERO ─── */}
         <section className="pt-36 pb-20 px-5 text-center relative">
           <div className="max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/5 text-xs font-mono text-amber-400 mb-8 fade-up fade-up-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#ff4500]/20 bg-[#ff4500]/5 text-xs font-mono text-[#ff4500] mb-8 fade-up fade-up-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ff4500] animate-pulse" />
               Snipflow Affiliate Program
             </div>
 
@@ -87,7 +87,7 @@ export default function AffiliatesPage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 fade-up fade-up-4">
               <a href="mailto:affiliates@dragonstoneenterprises.com"
-                className="px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-amber-500/25">
+                className="px-8 py-3.5 bg-[#ff4500] hover:bg-[#ff6a00] text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-[#ff4500]/25">
                 Apply Now
               </a>
               <a href="/"
@@ -119,7 +119,7 @@ export default function AffiliatesPage() {
         <section className="max-w-5xl mx-auto px-5 pb-20">
           <div className="bg-white/[0.02] border border-white/[0.06] rounded-3xl p-8 sm:p-12">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-3">What you earn</div>
+              <div className="text-xs font-mono text-[#ff4500] uppercase tracking-wider mb-3">What you earn</div>
               <h2 className="hero-title text-3xl sm:text-4xl font-extrabold mb-6">
                 30% of every payment.<br />
                 <span className="gradient-text">For a full year.</span>
@@ -133,8 +133,8 @@ export default function AffiliatesPage() {
                   { label: "10 referrals", monthly: "$57/mo", yearly: "$684/yr" },
                   { label: "50 referrals", monthly: "$285/mo", yearly: "$3,420/yr" },
                 ].map((row) => (
-                  <div key={row.label} className="bg-amber-500/[0.05] border border-amber-500/10 rounded-xl p-4">
-                    <div className="text-xs font-mono text-amber-400/70 mb-2">{row.label}</div>
+                  <div key={row.label} className="bg-[#ff4500]/[0.05] border border-[#ff4500]/10 rounded-xl p-4">
+                    <div className="text-xs font-mono text-[#ff4500]/70 mb-2">{row.label}</div>
                     <div className="text-xl font-extrabold text-white hero-title">{row.monthly}</div>
                     <div className="text-xs text-zinc-500 mt-0.5">{row.yearly}</div>
                   </div>
@@ -147,7 +147,7 @@ export default function AffiliatesPage() {
         {/* ─── HOW IT WORKS ─── */}
         <section className="max-w-5xl mx-auto px-5 pb-20">
           <div className="text-center mb-10">
-            <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-3">How it works</div>
+            <div className="text-xs font-mono text-[#ff4500] uppercase tracking-wider mb-3">How it works</div>
             <h2 className="hero-title text-3xl sm:text-4xl font-extrabold">Four steps to your first payout</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -158,7 +158,7 @@ export default function AffiliatesPage() {
               { step: "04", icon: "💸", title: "Get paid", desc: "Commissions are tracked automatically. We pay out every month via PayPal or Stripe once you hit the $25 minimum." },
             ].map((s) => (
               <div key={s.step} className="card-hover bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-                <div className="text-[10px] font-mono text-amber-500/60 mb-3">{s.step}</div>
+                <div className="text-[10px] font-mono text-[#ff4500]/60 mb-3">{s.step}</div>
                 <div className="text-2xl mb-3">{s.icon}</div>
                 <div className="text-sm font-semibold text-white mb-2">{s.title}</div>
                 <div className="text-xs text-zinc-500 leading-relaxed">{s.desc}</div>
@@ -170,7 +170,7 @@ export default function AffiliatesPage() {
         {/* ─── WHO IT'S FOR ─── */}
         <section className="max-w-5xl mx-auto px-5 pb-20">
           <div className="text-center mb-10">
-            <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-3">Who it&apos;s for</div>
+            <div className="text-xs font-mono text-[#ff4500] uppercase tracking-wider mb-3">Who it&apos;s for</div>
             <h2 className="hero-title text-3xl sm:text-4xl font-extrabold">If you have an audience, you qualify</h2>
           </div>
           <div className="grid sm:grid-cols-3 gap-4">
@@ -204,7 +204,7 @@ export default function AffiliatesPage() {
         <section className="max-w-5xl mx-auto px-5 pb-20">
           <div className="bg-white/[0.02] border border-white/[0.06] rounded-3xl p-8 sm:p-12">
             <div className="max-w-3xl mx-auto">
-              <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-3">No strings attached</div>
+              <div className="text-xs font-mono text-[#ff4500] uppercase tracking-wider mb-3">No strings attached</div>
               <h2 className="hero-title text-3xl font-extrabold mb-8">Simple rules. No gotchas.</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
@@ -216,7 +216,7 @@ export default function AffiliatesPage() {
                   { icon: "✓", text: "Cancel anytime — no lock-in, no contracts, just email us" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <span className="text-amber-400 font-bold text-lg leading-snug">{item.icon}</span>
+                    <span className="text-[#ff4500] font-bold text-lg leading-snug">{item.icon}</span>
                     <span className="text-sm text-zinc-400 leading-relaxed">{item.text}</span>
                   </div>
                 ))}
@@ -227,13 +227,13 @@ export default function AffiliatesPage() {
 
         {/* ─── FINAL CTA ─── */}
         <section className="max-w-5xl mx-auto px-5 pb-20">
-          <div className="bg-gradient-to-br from-amber-500/10 to-orange-600/5 border border-amber-500/20 rounded-3xl p-10 sm:p-16 text-center">
+          <div className="bg-gradient-to-br from-[#ff4500]/10 to-[#ff6a00]/5 border border-[#ff4500]/20 rounded-3xl p-10 sm:p-16 text-center">
             <h2 className="hero-title text-3xl sm:text-4xl font-extrabold mb-4">Ready to earn with Snipflow?</h2>
             <p className="text-zinc-400 mb-8 leading-relaxed max-w-xl mx-auto">
               Send us a quick email with a link to your content and a sentence about your audience. We&apos;ll get back to you within 48 hours.
             </p>
             <a href="mailto:affiliates@dragonstoneenterprises.com"
-              className="inline-block px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-amber-500/25">
+              className="inline-block px-8 py-3.5 bg-[#ff4500] hover:bg-[#ff6a00] text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-[#ff4500]/25">
               Apply Now — affiliates@dragonstoneenterprises.com
             </a>
             <p className="text-xs text-zinc-600 mt-4">We review every application personally. Usually hear back within 48 hours.</p>

@@ -310,9 +310,9 @@ export default function Home() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
         .hero-title { font-family: 'Syne', sans-serif; }
-        .glow-amber { box-shadow: 0 0 40px rgba(245, 158, 11, 0.15); }
+        .glow-amber { box-shadow: 0 0 40px rgba(255, 69, 0, 0.15); }
         .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-2px); border-color: rgba(245, 158, 11, 0.3); }
+        .card-hover:hover { transform: translateY(-2px); border-color: rgba(255, 69, 0, 0.3); }
         @keyframes scroll-left {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
@@ -334,7 +334,7 @@ export default function Home() {
         .fade-up-3 { animation-delay: 0.3s; opacity: 0; }
         .fade-up-4 { animation-delay: 0.4s; opacity: 0; }
         .gradient-text {
-          background: linear-gradient(135deg, #f59e0b, #f97316, #fbbf24);
+          background: linear-gradient(135deg, #ff4500, #ff6a00);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -350,8 +350,8 @@ export default function Home() {
 
       {/* ─── AMBIENT BACKGROUND ─── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] left-[20%] w-[800px] h-[800px] rounded-full opacity-20" style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full opacity-10" style={{ background: 'radial-gradient(circle, rgba(249,115,22,0.2) 0%, transparent 70%)' }} />
+        <div className="absolute top-[-10%] left-[20%] w-[800px] h-[800px] rounded-full opacity-20" style={{ background: 'radial-gradient(circle, rgba(255,69,0,0.15) 0%, transparent 70%)' }} />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full opacity-10" style={{ background: 'radial-gradient(circle, rgba(255,106,0,0.2) 0%, transparent 70%)' }} />
       </div>
 
       {/* ─── NAVBAR ─── */}
@@ -380,18 +380,18 @@ export default function Home() {
           <div className="flex items-center gap-3">
             {user ? (
               <>
-                {plan === "pro" && <span className="text-xs font-mono text-amber-500 hidden sm:block">Pro ✦</span>}
+                {plan === "pro" && <span className="text-xs font-mono text-[#ff4500] hidden sm:block">Pro ✦</span>}
                 {plan === "free" && remaining !== null && (
                   <span className="text-xs font-mono text-zinc-500 hidden sm:block">{remaining} left today</span>
                 )}
                 {plan === "free" && (
                   <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer"
-                    className="hidden sm:block px-4 py-1.5 text-sm font-semibold text-amber-400 border border-amber-500/30 rounded-full hover:bg-amber-500/10 transition-all">
+                    className="hidden sm:block px-4 py-1.5 text-sm font-semibold text-[#ff4500] border border-[#ff4500]/30 rounded-full hover:bg-[#ff4500]/10 transition-all">
                     Go Pro
                   </a>
                 )}
                 <button onClick={signOut} className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff4500] to-[#ff6a00] flex items-center justify-center text-white text-xs font-bold">
                     {userInitial}
                   </div>
                 </button>
@@ -403,7 +403,7 @@ export default function Home() {
                   Sign in
                 </button>
                 <button onClick={() => { setAuthTrigger('signin'); setShowAuthModal(true); }}
-                  className="px-4 py-2 text-sm font-semibold bg-amber-500 hover:bg-amber-400 text-black rounded-full transition-all">
+                  className="px-4 py-2 text-sm font-semibold bg-[#ff4500] hover:bg-[#ff4500] text-black rounded-full transition-all">
                   Get Started
                 </button>
               </>
@@ -415,8 +415,8 @@ export default function Home() {
       {/* ─── HERO ─── */}
       <section className="pt-32 pb-20 px-5 text-center relative">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/5 text-xs font-mono text-amber-400 mb-8 fade-up fade-up-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#ff4500]/20 bg-[#ff4500]/5 text-xs font-mono text-[#ff4500] mb-8 fade-up fade-up-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff4500] animate-pulse" />
             AI-powered content repurposing
           </div>
 
@@ -433,7 +433,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 fade-up fade-up-4">
             <button
               onClick={() => appRef.current?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40">
+              className="px-8 py-3.5 bg-[#ff4500] hover:bg-[#ff4500] text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-[#ff4500]/25 hover:shadow-[#ff4500]/40">
               Try Free — No Sign In Required
             </button>
             <button
@@ -500,7 +500,7 @@ export default function Home() {
               { step: "03", icon: "🚀", title: "Publish & execute", desc: "Copy your content and follow your prioritized game plan. Know exactly what to do next and in what order." },
             ].map((s) => (
               <div key={s.step} className="card-hover rounded-2xl p-6 border border-white/[0.07] bg-white/[0.02]">
-                <div className="text-[11px] font-mono text-amber-500/60 mb-3">{s.step}</div>
+                <div className="text-[11px] font-mono text-[#ff4500]/60 mb-3">{s.step}</div>
                 <div className="text-3xl mb-3">{s.icon}</div>
                 <h3 className="text-base font-semibold text-white mb-2">{s.title}</h3>
                 <p className="text-sm text-zinc-500 leading-relaxed">{s.desc}</p>
@@ -516,7 +516,7 @@ export default function Home() {
           {/* Feature 1 */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-3">Repurpose</div>
+              <div className="text-xs font-mono text-[#ff4500] uppercase tracking-wider mb-3">Repurpose</div>
               <h2 className="hero-title text-3xl font-extrabold mb-4">One transcript.<br />Three formats.</h2>
               <p className="text-zinc-400 leading-relaxed mb-6">Paste any transcript and get a full blog post, Twitter thread, and YouTube Shorts script — all optimized for each platform. Ready to copy and publish in under 2 minutes.</p>
               <div className="space-y-3">
@@ -531,7 +531,7 @@ export default function Home() {
               <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">Blog Post Preview</div>
               <div className="space-y-2">
                 {["# The Future of AI Content Creation", "## Introduction", "The landscape of content creation is shifting dramatically...", "", "## Key Takeaways", "• AI tools are 10x faster than manual writing", "• Quality has reached professional standards", "• Creators who adapt will dominate"].map((line, i) => (
-                  <div key={i} className={`text-xs font-mono ${line.startsWith('#') ? 'text-amber-400' : line.startsWith('•') ? 'text-zinc-300' : 'text-zinc-500'}`}>
+                  <div key={i} className={`text-xs font-mono ${line.startsWith('#') ? 'text-[#ff4500]' : line.startsWith('•') ? 'text-zinc-300' : 'text-zinc-500'}`}>
                     {line || <br />}
                   </div>
                 ))}
@@ -550,7 +550,7 @@ export default function Home() {
                   { rank: "#3", score: "7.9", idea: "Build an email course from your best episodes", tag: "Revenue" },
                 ].map((item) => (
                   <div key={item.rank} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.05]">
-                    <span className="text-[10px] font-mono text-amber-500 font-bold mt-0.5">{item.rank}</span>
+                    <span className="text-[10px] font-mono text-[#ff4500] font-bold mt-0.5">{item.rank}</span>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs text-zinc-300 leading-snug">{item.idea}</p>
                       <div className="flex items-center gap-2 mt-1">
@@ -563,7 +563,7 @@ export default function Home() {
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-3">Idea Extractor</div>
+              <div className="text-xs font-mono text-[#ff4500] uppercase tracking-wider mb-3">Idea Extractor</div>
               <h2 className="hero-title text-3xl font-extrabold mb-4">Extract ideas.<br />Build your game plan.</h2>
               <p className="text-zinc-400 leading-relaxed mb-6">Every transcript is full of ideas you haven't acted on yet. Snipflow extracts them all, scores them on impact, effort, and urgency — then ranks them so you know exactly what to do first.</p>
               <div className="space-y-3">
@@ -591,7 +591,7 @@ export default function Home() {
               <div key={i} className="w-72 flex-shrink-0 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
                 <p className="text-sm text-zinc-300 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-[10px] font-bold text-white">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#ff4500] to-[#ff6a00] flex items-center justify-center text-[10px] font-bold text-white">
                     {t.name.charAt(0)}
                   </div>
                   <div>
@@ -607,7 +607,7 @@ export default function Home() {
               <div key={i} className="w-72 flex-shrink-0 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
                 <p className="text-sm text-zinc-300 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-[10px] font-bold text-white">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#ff4500] to-[#ff6a00] flex items-center justify-center text-[10px] font-bold text-white">
                     {t.name.charAt(0)}
                   </div>
                   <div>
@@ -637,7 +637,7 @@ export default function Home() {
               <ul className="space-y-3 mb-8">
                 {["7 generations per day", "Blog + Thread + Shorts", "Idea Extractor", "Copy to clipboard"].map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-zinc-400">
-                    <span className="text-amber-400">✓</span> {f}
+                    <span className="text-[#ff4500]">✓</span> {f}
                   </li>
                 ))}
               </ul>
@@ -647,22 +647,22 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.04] p-8 relative overflow-hidden glow-amber">
-              <div className="absolute top-4 right-4 text-[10px] font-mono bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full">
+            <div className="rounded-2xl border border-[#ff4500]/30 bg-[#ff4500]/[0.04] p-8 relative overflow-hidden glow-amber">
+              <div className="absolute top-4 right-4 text-[10px] font-mono bg-[#ff4500]/20 text-[#ff4500] px-2 py-0.5 rounded-full">
                 🔥 18 founder spots
               </div>
-              <div className="text-sm font-semibold text-amber-400 mb-2">Pro</div>
+              <div className="text-sm font-semibold text-[#ff4500] mb-2">Pro</div>
               <div className="text-4xl font-extrabold hero-title mb-1">$19<span className="text-base font-normal text-zinc-500">/mo</span></div>
               <div className="text-xs text-zinc-500 mb-6">Founder pricing — lock it in forever</div>
               <ul className="space-y-3 mb-8">
                 {["Unlimited generations", "Unlimited idea extractions", "Priority processing", "All formats included", "Early access to new features"].map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-zinc-300">
-                    <span className="text-amber-400">✓</span> {f}
+                    <span className="text-[#ff4500]">✓</span> {f}
                   </li>
                 ))}
               </ul>
               <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer"
-                className="block w-full py-3 text-center bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-black font-bold rounded-xl transition-all text-sm shadow-lg shadow-amber-500/20">
+                className="block w-full py-3 text-center bg-gradient-to-r from-[#ff4500] to-[#ff6a00] hover:from-[#ff4500] hover:to-[#ff4500] text-black font-bold rounded-xl transition-all text-sm shadow-lg shadow-[#ff4500]/20">
                 Get Pro — $19/mo
               </a>
             </div>
@@ -687,11 +687,11 @@ export default function Home() {
             <div className="flex justify-center mb-8">
               <div className="inline-flex gap-1 bg-white/[0.04] border border-white/[0.07] p-1 rounded-xl">
                 <button onClick={() => { setMode("repurpose"); setExtractedIdeas(null); setActiveTab("blog"); }}
-                  className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${mode === "repurpose" ? "bg-amber-500/15 text-amber-400 shadow-sm" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${mode === "repurpose" ? "bg-[#ff4500]/15 text-[#ff4500] shadow-sm" : "text-zinc-500 hover:text-zinc-300"}`}>
                   <span>📄</span> Repurpose
                 </button>
                 <button onClick={() => { setMode("extract"); setGeneratedContent(null); setActiveTab("ideas"); }}
-                  className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${mode === "extract" ? "bg-amber-500/15 text-amber-400 shadow-sm" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${mode === "extract" ? "bg-[#ff4500]/15 text-[#ff4500] shadow-sm" : "text-zinc-500 hover:text-zinc-300"}`}>
                   <span>⚡</span> Idea Extractor
                 </button>
               </div>
@@ -707,7 +707,7 @@ export default function Home() {
                       <div>
                         <div className="text-sm font-semibold text-white mb-1">Getting a YouTube transcript</div>
                         <ol className="text-xs text-zinc-500 space-y-0.5 list-decimal list-inside leading-relaxed">
-                          <li>Install the free <a href="https://chromewebstore.google.com/detail/glasp-social-web-highligh/blnjnbmcgfdcmhphdhfkcmjfgcgfoclo" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300 underline underline-offset-2">Glasp Chrome extension</a></li>
+                          <li>Install the free <a href="https://chromewebstore.google.com/detail/glasp-social-web-highligh/blnjnbmcgfdcmhphdhfkcmjfgcgfoclo" target="_blank" rel="noopener noreferrer" className="text-[#ff4500] hover:text-[#ff6a00] underline underline-offset-2">Glasp Chrome extension</a></li>
                           <li>Open any YouTube video — transcript appears in sidebar</li>
                           <li>Click the copy icon, then paste below</li>
                         </ol>
@@ -715,7 +715,7 @@ export default function Home() {
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-amber-500/[0.04] border border-amber-500/10 rounded-xl p-4">
+                  <div className="bg-[#ff4500]/[0.04] border border-[#ff4500]/10 rounded-xl p-4">
                     <div className="flex items-start gap-3">
                       <div className="text-2xl mt-0.5">⚡</div>
                       <div>
@@ -733,7 +733,7 @@ export default function Home() {
                     onChange={(e) => setTranscript(e.target.value)}
                     placeholder={mode === "repurpose" ? "Paste your transcript here..." : "Paste anything here — reel caption, podcast notes, braindump..."}
                     rows={12}
-                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-amber-500/30 transition-all resize-none text-sm leading-relaxed"
+                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-[#ff4500]/30 transition-all resize-none text-sm leading-relaxed"
                   />
                   {transcript.length > 0 && (
                     <div className="mt-1.5 text-right">
@@ -745,7 +745,7 @@ export default function Home() {
                 <button
                   onClick={handleGenerate}
                   disabled={isLoading || !transcript.trim()}
-                  className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 text-sm">
+                  className="w-full py-3.5 bg-gradient-to-r from-[#ff4500] to-[#ff6a00] hover:from-[#ff4500] hover:to-[#ff4500] disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-[#ff4500]/20 text-sm">
                   {isLoading ? (
                     <><LoaderIcon className="w-4 h-4" /> {mode === "repurpose" ? "Generating..." : "Extracting..."}</>
                   ) : mode === "repurpose" ? (
@@ -758,7 +758,7 @@ export default function Home() {
                 <p className="text-center text-[11px] text-zinc-600">
                   {user ? (
                     plan === "pro" ? "Unlimited generations ✦" :
-                      remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining · <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400">Upgrade for unlimited</a></> : null
+                      remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining · <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="text-[#ff4500] hover:text-[#ff4500]">Upgrade for unlimited</a></> : null
                   ) : <>Try up to 7 generations free — no sign in needed</>}
                 </p>
               </div>
@@ -776,7 +776,7 @@ export default function Home() {
                     <div className="bg-white/[0.03] border border-white/[0.07] rounded-xl p-4">
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="text-sm font-bold text-white">{extractedIdeas.title}</h3>
-                        <button onClick={copyIdeasAsText} className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 rounded-lg transition-colors font-mono">
+                        <button onClick={copyIdeasAsText} className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#ff4500]/10 hover:bg-[#ff4500]/20 text-[#ff4500] rounded-lg transition-colors font-mono">
                           {copied === "all-ideas" ? <><CheckIcon /> Copied!</> : <><CopyIcon /> Copy All</>}
                         </button>
                       </div>
@@ -798,24 +798,24 @@ export default function Home() {
                       {extractedIdeas.ideas.map((idea, idx) => {
                         const done = completedIds.has(idea.id);
                         return (
-                          <div key={idea.id} className={`bg-white/[0.02] border rounded-xl p-4 transition-all duration-300 ${done ? "border-white/[0.04] opacity-50" : "border-white/[0.07] hover:border-amber-500/15"}`}>
+                          <div key={idea.id} className={`bg-white/[0.02] border rounded-xl p-4 transition-all duration-300 ${done ? "border-white/[0.04] opacity-50" : "border-white/[0.07] hover:border-[#ff4500]/15"}`}>
                             <div className="flex gap-3 items-start">
-                              <button onClick={() => toggleComplete(idea.id)} className={`w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 flex items-center justify-center transition-all text-[10px] ${done ? "bg-amber-500 border-amber-500 text-black" : "border-zinc-700 hover:border-amber-500/50 text-transparent"}`}>✓</button>
+                              <button onClick={() => toggleComplete(idea.id)} className={`w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 flex items-center justify-center transition-all text-[10px] ${done ? "bg-[#ff4500] border-[#ff4500] text-black" : "border-zinc-700 hover:border-[#ff4500]/50 text-transparent"}`}>✓</button>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                                  <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${idx === 0 ? "bg-amber-500/20 text-amber-400" : idx < 3 ? "bg-amber-500/10 text-amber-500/70" : "bg-zinc-800 text-zinc-500"}`}>#{idx + 1}</span>
+                                  <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${idx === 0 ? "bg-[#ff4500]/20 text-[#ff4500]" : idx < 3 ? "bg-[#ff4500]/10 text-[#ff4500]/70" : "bg-zinc-800 text-zinc-500"}`}>#{idx + 1}</span>
                                   <span className="text-[11px] text-zinc-500">{CATEGORY_ICONS[idea.category] || "📌"} {idea.category}</span>
-                                  <span className={`text-[10px] font-mono font-bold ml-auto ${idea.priority_score >= 7 ? "text-emerald-400" : idea.priority_score >= 4 ? "text-amber-400" : "text-zinc-500"}`}>{idea.priority_score?.toFixed?.(1) || idea.priority_score}</span>
+                                  <span className={`text-[10px] font-mono font-bold ml-auto ${idea.priority_score >= 7 ? "text-emerald-400" : idea.priority_score >= 4 ? "text-[#ff4500]" : "text-zinc-500"}`}>{idea.priority_score?.toFixed?.(1) || idea.priority_score}</span>
                                 </div>
                                 <div className={`text-sm font-semibold text-zinc-200 mb-1 leading-snug ${done ? "line-through" : ""}`}>{idea.idea}</div>
                                 <div className="text-xs text-zinc-500 mb-2.5 leading-relaxed">{idea.why}</div>
                                 <div className="flex gap-4 mb-2.5 flex-wrap">
-                                  <div className="flex items-center gap-1.5"><span className="text-[10px] text-zinc-600 w-9">Impact</span><ScoreBar value={idea.impact} color="#f59e0b" /></div>
+                                  <div className="flex items-center gap-1.5"><span className="text-[10px] text-zinc-600 w-9">Impact</span><ScoreBar value={idea.impact} color="#ff4500" /></div>
                                   <div className="flex items-center gap-1.5"><span className="text-[10px] text-zinc-600 w-9">Effort</span><ScoreBar value={idea.effort} color="#8b5cf6" /></div>
                                   <div className="flex items-center gap-1.5"><span className="text-[10px] text-zinc-600 w-9">Urgent</span><ScoreBar value={idea.urgency} color="#ef4444" /></div>
                                 </div>
-                                <div className="text-xs text-amber-500/70 bg-amber-500/[0.05] border border-amber-500/10 px-3 py-2 rounded-lg">
-                                  <span className="font-bold text-amber-400">Next →</span> {idea.next_step}
+                                <div className="text-xs text-[#ff4500]/70 bg-[#ff4500]/[0.05] border border-[#ff4500]/10 px-3 py-2 rounded-lg">
+                                  <span className="font-bold text-[#ff4500]">Next →</span> {idea.next_step}
                                 </div>
                               </div>
                             </div>
@@ -830,7 +830,7 @@ export default function Home() {
                     <div className="flex gap-1 bg-white/[0.03] p-1 rounded-xl">
                       {repurposeTabData.map((tab) => (
                         <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-                          className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-1.5 ${activeTab === tab.key ? "bg-amber-500/15 text-amber-400 shadow-sm" : "text-zinc-500 hover:text-zinc-300"}`}>
+                          className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-1.5 ${activeTab === tab.key ? "bg-[#ff4500]/15 text-[#ff4500] shadow-sm" : "text-zinc-500 hover:text-zinc-300"}`}>
                           <span>{tab.icon}</span>{tab.label}
                         </button>
                       ))}
@@ -840,7 +840,7 @@ export default function Home() {
                         <div>
                           <div className="flex items-center justify-between mb-4">
                             <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-wider">Blog Post</h3>
-                            <button onClick={() => copyToClipboard(generatedContent.blog, "blog")} className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 rounded-lg transition-colors font-mono">
+                            <button onClick={() => copyToClipboard(generatedContent.blog, "blog")} className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#ff4500]/10 hover:bg-[#ff4500]/20 text-[#ff4500] rounded-lg transition-colors font-mono">
                               {copied === "blog" ? <><CheckIcon /> Copied!</> : <><CopyIcon /> Copy</>}
                             </button>
                           </div>
@@ -851,7 +851,7 @@ export default function Home() {
                         <div>
                           <div className="flex items-center justify-between mb-4">
                             <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-wider">Twitter Thread</h3>
-                            <button onClick={() => copyToClipboard(generatedContent.tweets.join("\n\n"), "tweets")} className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 rounded-lg transition-colors font-mono">
+                            <button onClick={() => copyToClipboard(generatedContent.tweets.join("\n\n"), "tweets")} className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#ff4500]/10 hover:bg-[#ff4500]/20 text-[#ff4500] rounded-lg transition-colors font-mono">
                               {copied === "tweets" ? <><CheckIcon /> Copied!</> : <><CopyIcon /> Copy All</>}
                             </button>
                           </div>
@@ -859,9 +859,9 @@ export default function Home() {
                             {generatedContent.tweets.map((tweet, i) => (
                               <div key={i} className="bg-white/[0.03] border border-white/[0.06] rounded-lg p-3 group">
                                 <div className="flex items-start gap-2.5">
-                                  <span className="text-amber-500 font-mono text-xs font-bold mt-0.5">{i + 1}/{generatedContent.tweets.length}</span>
+                                  <span className="text-[#ff4500] font-mono text-xs font-bold mt-0.5">{i + 1}/{generatedContent.tweets.length}</span>
                                   <p className="flex-1 text-zinc-300 text-sm leading-relaxed">{tweet}</p>
-                                  <button onClick={() => copyToClipboard(tweet, `t-${i}`)} className="text-zinc-600 hover:text-amber-400 transition-colors opacity-0 group-hover:opacity-100">
+                                  <button onClick={() => copyToClipboard(tweet, `t-${i}`)} className="text-zinc-600 hover:text-[#ff4500] transition-colors opacity-0 group-hover:opacity-100">
                                     {copied === `t-${i}` ? <CheckIcon /> : <CopyIcon />}
                                   </button>
                                 </div>
@@ -874,7 +874,7 @@ export default function Home() {
                         <div>
                           <div className="flex items-center justify-between mb-4">
                             <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-wider">YouTube Shorts Script</h3>
-                            <button onClick={() => copyToClipboard(generatedContent.shorts, "shorts")} className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 rounded-lg transition-colors font-mono">
+                            <button onClick={() => copyToClipboard(generatedContent.shorts, "shorts")} className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#ff4500]/10 hover:bg-[#ff4500]/20 text-[#ff4500] rounded-lg transition-colors font-mono">
                               {copied === "shorts" ? <><CheckIcon /> Copied!</> : <><CopyIcon /> Copy</>}
                             </button>
                           </div>
@@ -892,11 +892,11 @@ export default function Home() {
 
       {/* ─── FINAL CTA ─── */}
       <section className="px-5 pb-24">
-        <div className="max-w-3xl mx-auto text-center rounded-2xl border border-amber-500/20 bg-amber-500/[0.04] p-12 glow-amber">
+        <div className="max-w-3xl mx-auto text-center rounded-2xl border border-[#ff4500]/20 bg-[#ff4500]/[0.04] p-12 glow-amber">
           <h2 className="hero-title text-3xl sm:text-4xl font-extrabold mb-4">Your transcript deserves better than a blank page.</h2>
           <p className="text-zinc-400 mb-8 leading-relaxed">Join thousands of creators turning their transcripts into content empires. Start free today.</p>
           <button onClick={() => { setAuthTrigger('signin'); setShowAuthModal(true); }}
-            className="px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-amber-500/25">
+            className="px-8 py-3.5 bg-[#ff4500] hover:bg-[#ff4500] text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-[#ff4500]/25">
             Get Started Free
           </button>
           <p className="text-xs text-zinc-600 mt-4">No credit card required · 7 free generations daily</p>
@@ -927,7 +927,7 @@ export default function Home() {
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-[#111] border border-white/[0.1] rounded-2xl p-6 max-w-sm w-full relative">
             <div className="text-center mb-5">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center mx-auto mb-3 shadow-lg shadow-amber-500/20">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ff4500] to-[#ff6a00] flex items-center justify-center mx-auto mb-3 shadow-lg shadow-[#ff4500]/20">
                 <ZapIcon className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-lg font-bold text-white hero-title">{emailConfirmSent ? "Check your email" : authTrigger === 'limit_reached' ? "Sign in to continue" : authMode === "signup" ? "Create your account" : "Welcome back"}</h3>
@@ -942,7 +942,7 @@ export default function Home() {
                   if (error) setAuthError(error.message);
                   else setAuthError("Confirmation email re-sent!");
                 }}
-                  className="w-full py-3 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-bold rounded-xl transition-all text-sm">
+                  className="w-full py-3 bg-[#ff4500]/10 hover:bg-[#ff4500]/20 text-[#ff4500] font-bold rounded-xl transition-all text-sm">
                   Resend Confirmation Email
                 </button>
               </div>
@@ -961,22 +961,22 @@ export default function Home() {
 
                 <div className="space-y-3">
                   <input type="email" value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} placeholder="Email"
-                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.08] rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-amber-500/40 text-sm" />
+                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.08] rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-[#ff4500]/40 text-sm" />
                   <input type="password" value={authPassword} onChange={(e) => { setAuthPassword(e.target.value); setPasswordError(null); }} placeholder="Password (min 6 characters)"
-                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.08] rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-amber-500/40 text-sm" />
+                    className="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.08] rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-[#ff4500]/40 text-sm" />
                   {passwordError && <div className="text-xs px-3 py-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20">{passwordError}</div>}
                   {authError && <div className={`text-xs px-3 py-2 rounded-lg ${authError.includes("re-sent") ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-red-500/10 text-red-400 border border-red-500/20"}`}>{authError}</div>}
                   <button onClick={handleEmailAuth} disabled={authSubmitting || !authEmail || authPassword.length < 6}
-                    className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 text-black font-bold rounded-xl transition-all text-sm">
+                    className="w-full py-3 bg-gradient-to-r from-[#ff4500] to-[#ff6a00] hover:from-[#ff4500] hover:to-[#ff4500] disabled:opacity-40 text-black font-bold rounded-xl transition-all text-sm">
                     {authSubmitting ? "Please wait..." : authMode === "signup" ? "Create Account" : "Sign In"}
                   </button>
                 </div>
 
                 <p className="text-center text-xs text-zinc-500 mt-4">
                   {authMode === "signup" ? (
-                    <>Already have an account? <button onClick={() => { setAuthMode("login"); setAuthError(null); }} className="text-amber-400 hover:text-amber-300">Sign in</button></>
+                    <>Already have an account? <button onClick={() => { setAuthMode("login"); setAuthError(null); }} className="text-[#ff4500] hover:text-[#ff6a00]">Sign in</button></>
                   ) : (
-                    <>Don&apos;t have an account? <button onClick={() => { setAuthMode("signup"); setAuthError(null); }} className="text-amber-400 hover:text-amber-300">Sign up</button></>
+                    <>Don&apos;t have an account? <button onClick={() => { setAuthMode("signup"); setAuthError(null); }} className="text-[#ff4500] hover:text-[#ff6a00]">Sign up</button></>
                   )}
                 </p>
               </>
