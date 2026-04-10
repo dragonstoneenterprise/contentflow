@@ -56,7 +56,10 @@ export default function Home() {
   const [authPassword, setAuthPassword] = useState("");
   const [authMode, setAuthMode] = useState<"login" | "signup" | "forgot_password">("signup");
   const [authError, setAuthError] = useState<string | null>(null);
+  const [authSuccess, setAuthSuccess] = useState<string | null>(null);
   const [authSubmitting, setAuthSubmitting] = useState(false);
+  const [emailConfirmSent, setEmailConfirmSent] = useState(false);
+  const [authTrigger, setAuthTrigger] = useState<string | null>(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   // App state
@@ -120,10 +123,8 @@ export default function Home() {
     if (error) setAuthError(error.message);
   };
 
-  // Email auth
   const handleEmailAuth = async () => {
     setAuthError(null);
-    setAuthSuccess(null); // Clear any previous success messages
     setAuthSubmitting(true);
     try {
       if (authMode === "signup") {
