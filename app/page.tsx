@@ -54,12 +54,9 @@ export default function Home() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authEmail, setAuthEmail] = useState("");
   const [authPassword, setAuthPassword] = useState("");
-  const [authMode, setAuthMode] = useState<"login" | "signup" | "forgot_password">("signup");
+  const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
   const [authError, setAuthError] = useState<string | null>(null);
-  const [authSuccess, setAuthSuccess] = useState<string | null>(null);
   const [authSubmitting, setAuthSubmitting] = useState(false);
-  const [emailConfirmSent, setEmailConfirmSent] = useState(false);
-  const [authTrigger, setAuthTrigger] = useState<string | null>(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   // App state
@@ -123,6 +120,7 @@ export default function Home() {
     if (error) setAuthError(error.message);
   };
 
+  const handleEmailAuth = async () => {
     setAuthError(null);
     setAuthSubmitting(true);
     try {
@@ -148,41 +146,6 @@ export default function Home() {
       setAuthError(message);
     } finally {
       setAuthSubmitting(false);
-    }
-  };
-
-  const handleForgotPassword = async () => {
-    setAuthError(null);
-    setAuthSuccess(null);
-    setAuthSubmitting(true);
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(authEmail, {
-        redirectTo: `${window.location.origin}/auth/update-password`,
-      });
-      if (error) throw error;
-      setAuthSuccess("Password reset link sent! Check your email.");
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to send reset link.";
-      setAuthError(message);
-    } finally {
-      setAuthSubmitting(false);
-    }
-  };
-
-  const handleUpgrade = async () => {
-    try {
-      const res = await fetch("/api/create-checkout-session", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        setError(data.error || "Failed to create checkout session.");
-      }
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to initiate upgrade.";
-      setError(message);
     }
   };
 
@@ -323,10 +286,10 @@ export default function Home() {
                   <span className="text-xs font-mono text-amber-500">Pro ✦</span>
                 )}
                 {plan === "free" && (
-                  <button onClick={handleUpgrade}
+                  <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer"
                     className="px-4 py-1.5 text-sm font-semibold text-amber-400 border border-amber-500/30 rounded-full hover:bg-amber-500/10 transition-all duration-200">
                     Go Pro
-                  </button>
+                  </a>
                 )}
                 <div style={{display:"flex",alignItems:"center",gap:"10px"}}><div style={{width:"32px",height:"32px",borderRadius:"50%",background:"linear-gradient(135deg,#f59e0b,#ea580c)",display:"flex",alignItems:"center",justifyContent:"center",color:"white",fontSize:"12px",fontWeight:"bold"}}>{userInitial}</div><a href="/signout" style={{fontSize:"12px",color:"#a1a1aa",textDecoration:"none"}}>Logout</a></div>
               </>
@@ -466,7 +429,7 @@ export default function Home() {
                 <p className="text-center text-[11px] text-zinc-600">
                   {user ? (
                     plan === "pro" ? "Unlimited generations ✦" :
-                    remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining today · <button onClick={handleUpgrade} className="text-amber-500 hover:text-amber-400">Upgrade for unlimited</button></> : null
+                    remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining today · <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400">Upgrade for unlimited</a></> : null
                   ) : <>{typeof window !== "undefined" && parseInt(localStorage.getItem("guest_uses") || "0") >= 7 ? <>Sign in for 7 free/day · <button onClick={() => setShowAuthModal(true)} className="text-amber-500 hover:text-amber-400">Create free account</button></> : <>Try up to 7 generations free — no sign in needed</>}</>}                </p>
               </div>
 
@@ -646,9 +609,9 @@ export default function Home() {
                 <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> Priority processing</li>
                 <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> All formats included</li>
               </ul>
-              <button onClick={handleUpgrade} className="block w-full py-2.5 text-center bg-gradient-to-r from-amber-500 to-orange-600 text-white text-sm font-bold rounded-lg hover:from-amber-400 hover:to-orange-500 transition-all shadow-lg shadow-amber-500/15">
+              <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="block w-full py-2.5 text-center bg-gradient-to-r from-amber-500 to-orange-600 text-white text-sm font-bold rounded-lg hover:from-amber-400 hover:to-orange-500 transition-all shadow-lg shadow-amber-500/15">
                 Get Pro
-              </button>
+              </a>
             </div>
           </div>
         </section>
@@ -673,14 +636,9 @@ export default function Home() {
                 <ZapIcon className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-lg font-bold text-white">
-                {authMode === "signup" ? "Create your account" :
-                 authMode === "login" ? "Welcome back" :
-                 "Forgot your password?"}
+                {authMode === "signup" ? "Create your account" : "Welcome back"}
               </h3>
-              <p className="text-zinc-500 text-xs mt-1">
-                {authMode === "signup" || authMode === "login" ? "3 free generations per day, no credit card needed" :
-                 "Enter your email to receive a password reset link"}
-              </p>
+              <p className="text-zinc-500 text-xs mt-1">3 free generations per day, no credit card needed</p>
             </div>
 
                 <button onClick={signInWithGoogle} disabled={authSubmitting} className="w-full py-3 bg-white hover:bg-zinc-100 text-zinc-900 font-semibold rounded-xl transition-colors flex items-center justify-center gap-2.5 text-sm mb-4 disabled:opacity-50 disabled:cursor-not-allowed">
@@ -695,47 +653,25 @@ export default function Home() {
             </div>
 
             <div className="space-y-3">
-              {authMode === "forgot_password" ? (
-                <>
-                  <input type="email" value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} placeholder="Email" className="w-full px-4 py-3 bg-zinc-900/60 border border-zinc-700/40 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500/40 text-sm disabled:opacity-50" disabled={authSubmitting} />
-                  <button onClick={handleForgotPassword} disabled={authSubmitting || !authEmail} className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 text-white font-bold rounded-xl transition-all text-sm">
-                    {authSubmitting ? "Sending..." : "Send Reset Link"}
-                  </button>
-                  <p className="text-center text-xs text-zinc-500 mt-4">
-                    <button onClick={() => { setAuthMode("login"); setAuthError(null); setAuthSuccess(null); }} className="text-amber-400 hover:text-amber-300">Back to Sign In</button>
-                  </p>
-                </>
-              ) : (
-                <>
-                  <input type="email" value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} placeholder="Email" className="w-full px-4 py-3 bg-zinc-900/60 border border-zinc-700/40 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500/40 text-sm disabled:opacity-50" disabled={authSubmitting} />
-                  <input type="password" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} placeholder="Password (min 6 characters)" className="w-full px-4 py-3 bg-zinc-900/60 border border-zinc-700/40 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500/40 text-sm disabled:opacity-50" disabled={authSubmitting} />
-                  {authSuccess && (
-                    <div className="text-xs px-3 py-2 rounded-lg bg-emerald-100 text-emerald-700 border border-emerald-300 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">{authSuccess}</div>
-                  )}
-                  {authError && (
-                    <div className="text-xs px-3 py-2 rounded-lg bg-red-100 text-red-700 border border-red-300 dark:bg-red-500/10 dark:text-red-400 dark:border-red-500/20">{authError}</div>
-                  )}
-                  <button onClick={handleEmailAuth} disabled={authSubmitting || !authEmail || authPassword.length < 6} className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 text-white font-bold rounded-xl transition-all text-sm">
-                    {authSubmitting ? "Please wait..." : authMode === "signup" ? "Create Account" : "Sign In"}
-                  </button>
-                </>
+              <input type="email" value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} placeholder="Email" className="w-full px-4 py-3 bg-zinc-900/60 border border-zinc-700/40 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500/40 text-sm disabled:opacity-50" disabled={authSubmitting} />
+              <input type="password" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} placeholder="Password (min 6 characters)" className="w-full px-4 py-3 bg-zinc-900/60 border border-zinc-700/40 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500/40 text-sm disabled:opacity-50" disabled={authSubmitting} />
+              {authError && (
+                <div className="text-xs px-3 py-2 rounded-lg bg-red-100 text-red-700 border border-red-300 dark:bg-red-500/10 dark:text-red-400 dark:border-red-500/20">{authError}</div>
               )}
+              <button onClick={handleEmailAuth} disabled={authSubmitting || !authEmail || authPassword.length < 6} className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 text-white font-bold rounded-xl transition-all text-sm">
+                {authSubmitting ? "Please wait..." : authMode === "signup" ? "Create Account" : "Sign In"}
+              </button>
             </div>
 
                 <p className="text-center text-xs text-zinc-500 mt-4">
                   {authMode === "signup" ? (
-                    <>Already have an account? <button onClick={() => { setAuthMode("login"); setAuthError(null); setAuthSuccess(null); }} className="text-amber-400 hover:text-amber-300">Sign in</button></>
+                    <>Already have an account? <button onClick={() => { setAuthMode("login"); setAuthError(null); }} className="text-amber-400 hover:text-amber-300">Sign in</button></>
                   ) : (
-                    <>Don&apos;t have an account? <button onClick={() => { setAuthMode("signup"); setAuthError(null); setAuthSuccess(null); }} className="text-amber-400 hover:text-amber-300">Sign up</button></>
+                    <>Don&apos;t have an account? <button onClick={() => { setAuthMode("signup"); setAuthError(null); }} className="text-amber-400 hover:text-amber-300">Sign up</button></>
                   )}
                 </p>
-                {authMode === "login" && (
-                  <p className="text-center text-xs mt-2">
-                    <button onClick={() => setAuthMode("forgot_password")} className="text-amber-400 hover:text-amber-300">Forgot password?</button>
-                  </p>
-                )}
 
-            <button onClick={() => { setShowAuthModal(false); setAuthError(null); setAuthSuccess(null); setAuthEmail(""); setAuthPassword(""); setEmailConfirmSent(false); setAuthTrigger(null); }} className="absolute top-4 right-4 text-zinc-600 hover:text-zinc-400 transition-colors text-lg">×</button>
+            <button onClick={() => { setShowAuthModal(false); setAuthError(null); setAuthEmail(""); setAuthPassword(""); }} className="absolute top-4 right-4 text-zinc-600 hover:text-zinc-400 transition-colors text-lg">×</button>
           </div>
         </div>
       )}
