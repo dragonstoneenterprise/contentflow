@@ -124,7 +124,7 @@ export default function Home() {
           setPlan(profile.plan);
           const today = new Date().toISOString().split("T")[0];
           const usage = profile.last_reset === today ? profile.daily_usage : 0;
-          const limit = profile.plan === "pro" ? 999999 : 7;
+          const limit = profile.plan === "pro" ? 999999 : 3;
           setRemaining(Math.max(0, limit - usage));
         }
       }
@@ -212,7 +212,7 @@ export default function Home() {
     if (!transcript.trim()) { setError("Please paste content first"); return; }
     if (!user) {
       let guestUses = parseInt(localStorage.getItem("guest_uses") || "0");
-      if (guestUses >= 7) { setAuthTrigger('limit_reached'); setShowAuthModal(true); return; }
+      if (guestUses >= 3) { setAuthTrigger('limit_reached'); setShowAuthModal(true); return; }
       localStorage.setItem("guest_uses", (guestUses + 1).toString());
     }
     if (remaining !== null && remaining <= 0 && plan === "free") {
@@ -279,12 +279,61 @@ export default function Home() {
     setTimeout(() => setCopied(null), 2000);
   };
 
+  const buildGamePlanText = () => {
+    if (!extractedIdeas) return "";
+    const ideasText = extractedIdeas.ideas.map((idea, i) =>
+      `#${i + 1} [${idea.category}] (Score: ${idea.priority_score?.toFixed?.(1) || idea.priority_score})\n${idea.idea}\nWhy: ${idea.why}\nNext step: ${idea.next_step}`
+    ).join("\n\n");
+    const quickWins = extractedIdeas.quick_wins.map(w => `• ${w}`).join("\n");
+    return `${extractedIdeas.title}\n\nQUICK WINS\n${quickWins}\n\nPRIORITY ACTIONS\n${ideasText}`;
+  };
+
+  const buildGamePlanMarkdown = () => {
+    if (!extractedIdeas) return "";
+    const date = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+    const quickWins = extractedIdeas.quick_wins.map(w => `- ${w}`).join("\n");
+    const ideasMd = extractedIdeas.ideas.map((idea, i) =>
+      `### #${i + 1} [${idea.category}] — Score: ${idea.priority_score?.toFixed?.(1) || idea.priority_score}\n**${idea.idea}**\n\n**Why:** ${idea.why}\n\n**Next Step:** ${idea.next_step}`
+    ).join("\n\n");
+    return `# Snipflow Game Plan\nGenerated: ${date}\nSource: ${extractedIdeas.title}\n\n## Quick Wins\n${quickWins}\n\n## Priority Actions\n\n${ideasMd}\n\n## Agent Instructions\nFeed this file to your AI agent and say: "Execute the top 3 priorities starting with the Quick Wins."`;
+  };
+
+  const downloadMarkdown = () => {
+    if (!extractedIdeas) return;
+    const md = buildGamePlanMarkdown();
+    const blob = new Blob([md], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `snipflow-game-plan-${Date.now()}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const openInClaude = () => {
+    if (!extractedIdeas) return;
+    const text = buildGamePlanText();
+    window.open(`https://claude.ai/new?q=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  const openInChatGPT = () => {
+    if (!extractedIdeas) return;
+    const text = buildGamePlanText();
+    window.open(`https://chat.openai.com/?q=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  const handleProExportClick = (action: () => void) => {
+    if (plan !== "pro") {
+      setAuthTrigger("limit_reached");
+      setShowAuthModal(true);
+      return;
+    }
+    action();
+  };
+
   const copyIdeasAsText = () => {
     if (!extractedIdeas) return;
-    const text = extractedIdeas.ideas.map((idea, i) =>
-      `#${i + 1} [${idea.category}] (Score: ${idea.priority_score})\n${idea.idea}\nWhy: ${idea.why}\nNext step: ${idea.next_step}\n`
-    ).join("\n");
-    copyToClipboard(`${extractedIdeas.title}\n\n${text}\nQuick Wins:\n${extractedIdeas.quick_wins.map(w => `• ${w}`).join("\n")}`, "all-ideas");
+    copyToClipboard(buildGamePlanText(), "all-ideas");
   };
 
   const isLoading = isGenerating || isExtractingIdeas;
@@ -635,7 +684,7 @@ export default function Home() {
               <div className="text-4xl font-extrabold hero-title mb-1">$0</div>
               <div className="text-xs text-zinc-500 mb-6">Forever free</div>
               <ul className="space-y-3 mb-8">
-                {["7 generations per day", "Blog + Thread + Shorts", "Idea Extractor", "Copy to clipboard"].map((f) => (
+                {["3 generations per day", "Blog + Thread + Shorts", "Idea Extractor", "Copy to clipboard"].map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-zinc-400">
                     <span className="text-[#ff4500]">✓</span> {f}
                   </li>
@@ -759,7 +808,7 @@ export default function Home() {
                   {user ? (
                     plan === "pro" ? "Unlimited generations ✦" :
                       remaining !== null ? <>{remaining} free generation{remaining !== 1 ? "s" : ""} remaining · <a href="https://9245368029329.gumroad.com/l/tnlfjv" target="_blank" rel="noopener noreferrer" className="text-[#ff4500] hover:text-[#ff4500]">Upgrade for unlimited</a></> : null
-                  ) : <>Try up to 7 generations free — no sign in needed</>}
+                  ) : <>Try up to 3 generations free — no sign in needed</>}
                 </p>
               </div>
 
@@ -781,6 +830,28 @@ export default function Home() {
                         </button>
                       </div>
                       <p className="text-zinc-400 text-sm leading-relaxed">{extractedIdeas.summary}</p>
+                    </div>
+
+                    {/* Export Buttons — Pro only (badge shown to all) */}
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => handleProExportClick(openInClaude)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#ff4500]/10 hover:bg-[#ff4500]/20 text-[#ff4500] rounded-lg transition-colors font-mono">
+                        🤖 Open in Claude
+                        <span className="text-[9px] bg-[#ff4500]/25 text-[#ff4500] px-1.5 py-0.5 rounded font-bold ml-0.5">Pro</span>
+                      </button>
+                      <button
+                        onClick={() => handleProExportClick(openInChatGPT)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#ff4500]/10 hover:bg-[#ff4500]/20 text-[#ff4500] rounded-lg transition-colors font-mono">
+                        💬 Open in ChatGPT
+                        <span className="text-[9px] bg-[#ff4500]/25 text-[#ff4500] px-1.5 py-0.5 rounded font-bold ml-0.5">Pro</span>
+                      </button>
+                      <button
+                        onClick={() => handleProExportClick(downloadMarkdown)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#ff4500]/10 hover:bg-[#ff4500]/20 text-[#ff4500] rounded-lg transition-colors font-mono">
+                        ⬇️ Download Markdown
+                        <span className="text-[9px] bg-[#ff4500]/25 text-[#ff4500] px-1.5 py-0.5 rounded font-bold ml-0.5">Pro</span>
+                      </button>
                     </div>
 
                     {extractedIdeas.quick_wins?.length > 0 && (
@@ -899,7 +970,7 @@ export default function Home() {
             className="px-8 py-3.5 bg-[#ff4500] hover:bg-[#ff4500] text-black font-bold rounded-full transition-all text-sm shadow-lg shadow-[#ff4500]/25">
             Get Started Free
           </button>
-          <p className="text-xs text-zinc-600 mt-4">No credit card required · 7 free generations daily</p>
+          <p className="text-xs text-zinc-600 mt-4">No credit card required · 3 free generations daily</p>
         </div>
       </section>
 
@@ -931,7 +1002,7 @@ export default function Home() {
                 <ZapIcon className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-lg font-bold text-white hero-title">{emailConfirmSent ? "Check your email" : authTrigger === 'limit_reached' ? "Sign in to continue" : authMode === "signup" ? "Create your account" : "Welcome back"}</h3>
-              <p className="text-zinc-500 text-xs mt-1">{emailConfirmSent ? "We've sent a confirmation link to " + authEmail : "7 free generations per day, no credit card needed"}</p>
+              <p className="text-zinc-500 text-xs mt-1">{emailConfirmSent ? "We've sent a confirmation link to " + authEmail : "3 free generations per day, no credit card needed"}</p>
             </div>
 
             {emailConfirmSent ? (
