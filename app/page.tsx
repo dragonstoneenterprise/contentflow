@@ -68,12 +68,12 @@ const CATEGORY_ICONS: Record<string, string> = {
 const YOUTUBE_VIDEO_ID = "YOUR_VIDEO_ID_HERE"; // Replace with your YouTube video ID
 
 const testimonials = [
-  { name: "Sarah K.", role: "Podcast Host", text: "I used to spend 3 hours turning each episode into content. Now it takes 2 minutes. Snipflow is insane." },
-  { name: "Marcus T.", role: "Content Creator", text: "The game plan feature is what sold me. It doesn't just repurpose — it tells me exactly what to do next." },
-  { name: "Priya M.", role: "Marketing Lead", text: "We onboard every new podcast guest and turn their interview into a full content week. Game changer." },
-  { name: "James R.", role: "YouTuber", text: "Blog post, tweet thread, and Shorts script in under 2 minutes. I've 10x'd my output without working harder." },
-  { name: "Anika P.", role: "Founder", text: "The idea extractor is brilliant. It pulls insights I didn't even know were in my own content." },
-  { name: "David L.", role: "Agency Owner", text: "We use Snipflow for every client. What used to take a day now takes 10 minutes per podcast episode." },
+  { role: "Podcast Host", text: "I was leaving hours of content value on the table after every episode. Snipflow changes that." },
+  { role: "Content Creator", text: "Most AI tools just summarize. This one actually tells you what to do with your content next." },
+  { role: "YouTuber", text: "One transcript. Blog post, tweet thread, newsletter, and a game plan. In under 2 minutes." },
+  { role: "Founder", text: "The idea extractor is the feature I didn't know I needed. It finds opportunities in my own words." },
+  { role: "Course Creator", text: "This is what I wished existed when I started repurposing content manually." },
+  { role: "Snipflow", text: "18 founder spots at $19/month. Once they're gone, the price goes up." },
 ];
 
 export default function Home() {
@@ -593,8 +593,7 @@ export default function Home() {
       {/* ─── TESTIMONIALS ─── */}
       <section className="pb-24 overflow-hidden">
         <div className="max-w-5xl mx-auto px-5 text-center mb-12">
-          <h2 className="hero-title text-3xl sm:text-4xl font-extrabold mb-4">Loved by creators</h2>
-          <p className="text-zinc-400">See why thousands trust Snipflow for their content workflow.</p>
+          <h2 className="hero-title text-3xl sm:text-4xl font-extrabold mb-4">What creators are saying</h2>
         </div>
 
         <div className="space-y-4">
@@ -602,15 +601,7 @@ export default function Home() {
             {[...testimonials, ...testimonials].map((t, i) => (
               <div key={i} className="w-72 flex-shrink-0 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
                 <p className="text-sm text-zinc-300 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#ff4500] to-[#ff6a00] flex items-center justify-center text-[10px] font-bold text-white">
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-white">{t.name}</div>
-                    <div className="text-[10px] text-zinc-500">{t.role}</div>
-                  </div>
-                </div>
+                <div className="text-[10px] text-zinc-500">— {t.role}</div>
               </div>
             ))}
           </div>
@@ -618,15 +609,7 @@ export default function Home() {
             {[...testimonials.slice().reverse(), ...testimonials.slice().reverse()].map((t, i) => (
               <div key={i} className="w-72 flex-shrink-0 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
                 <p className="text-sm text-zinc-300 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#ff4500] to-[#ff6a00] flex items-center justify-center text-[10px] font-bold text-white">
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-white">{t.name}</div>
-                    <div className="text-[10px] text-zinc-500">{t.role}</div>
-                  </div>
-                </div>
+                <div className="text-[10px] text-zinc-500">— {t.role}</div>
               </div>
             ))}
           </div>
