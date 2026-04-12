@@ -616,6 +616,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── AI WORKFLOW ─── */}
+      <section className="px-5 pb-24">
+        <div className="max-w-3xl mx-auto">
+          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-10 sm:p-14">
+            <div className="text-xs font-mono text-[#ff4500] uppercase tracking-wider mb-4">AI-Ready Output</div>
+            <h2 className="hero-title text-3xl sm:text-4xl font-extrabold mb-5">Copy straight into<br />Claude or ChatGPT</h2>
+            <p className="text-zinc-400 leading-relaxed mb-10 max-w-xl">Every output comes formatted as clean markdown — ready to paste into any AI tool, editor, or CMS. No reformatting. No cleanup. Just copy and go.</p>
+            <div className="space-y-4">
+              {[
+                "Clean markdown output — paste into Claude, ChatGPT, Notion, or your CMS instantly",
+                "One-click copy to clipboard for every generated piece",
+                "Works with any AI workflow — use it as a starting point or ship it as-is",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3 text-sm text-zinc-300">
+                  <span className="text-[#ff4500] font-bold mt-0.5 flex-shrink-0">✓</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── PRICING ─── */}
       <section id="pricing" className="px-5 pb-24">
         <div className="max-w-3xl mx-auto">
