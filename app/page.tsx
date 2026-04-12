@@ -2,8 +2,8 @@
 import "./globals.css";
 
 import { useState, useEffect, useRef } from "react";
-// import { createClient } from "@/lib/supabase/client";
-interface User {}; // Dummy User type for debugging
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 interface GeneratedContent {
   blog: string;
@@ -77,7 +77,7 @@ const testimonials = [
 ];
 
 export default function Home() {
-  const supabase: any = { auth: { getUser: async () => ({ data: { user: null } }), onAuthStateChange: () => ({ subscription: { unsubscribe: () => {} } }), signInWithOAuth: async () => ({ error: null }), signUp: async () => ({ error: null }), signInWithPassword: async () => ({ error: null }), signOut: async () => {} }, from: () => ({ select: () => ({ eq: () => ({ single: async () => ({ data: null }) }) }) }) };
+  const supabase = createClient();
 
   // Auth state
   const [user, setUser] = useState<User | null>(null);
@@ -111,12 +111,37 @@ export default function Home() {
   const appRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Mocked user data for debugging
-    setUser(null);
-    setAuthLoading(false);
-    // Mocked subscription for debugging
-    const subscription = { unsubscribe: () => {} };
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("plan, daily_usage, last_reset")
+          .eq("id", user.id)
+          .single();
+        if (profile) {
+          setPlan(profile.plan);
+          const today = new Date().toISOString().split("T")[0];
+          const usage = profile.last_reset === today ? profile.daily_usage : 0;
+          const limit = profile.plan === "pro" ? 999999 : 3;
+          setRemaining(Math.max(0, limit - usage));
+        }
+      }
+      setAuthLoading(false);
+    };
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: { user: User } | null) => {
+      setUser(session?.user ?? null);
+      if (!session?.user) {
+        setRemaining(null);
+        setPlan("free");
+      }
+    });
+
     return () => subscription.unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -126,17 +151,46 @@ export default function Home() {
   }, [showAuthModal, authTrigger]);
 
   const signInWithGoogle = async () => {
-    console.log("signInWithGoogle mocked");
-    setAuthError("Sign-in mocked for build");
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+    if (error) setAuthError(error.message);
   };
 
   const handleEmailAuth = async () => {
-    console.log("handleEmailAuth mocked");
-    setAuthError("Email auth mocked for build");
+    setAuthError(null);
+    setAuthSubmitting(true);
+    try {
+      if (authMode === "signup") {
+        const { error } = await supabase.auth.signUp({
+          email: authEmail,
+          password: authPassword,
+          options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+        });
+        if (error) throw error;
+        setAuthError("Check your email for the confirmation link!");
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: authEmail,
+          password: authPassword,
+        });
+        if (error) throw error;
+        setShowAuthModal(false);
+        window.location.reload();
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Authentication failed";
+      setAuthError(message);
+    } finally {
+      setAuthSubmitting(false);
+    }
   };
 
   const signOut = async () => {
-    console.log("signOut mocked");
+    await supabase.auth.signOut();
     setUser(null);
     setRemaining(null);
     setGeneratedContent(null);
