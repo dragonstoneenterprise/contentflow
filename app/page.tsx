@@ -418,7 +418,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <button onClick={() => { setShowAuthModal(true); }}
               className="px-4 py-2 text-sm font-semibold bg-[#ff4500] hover:bg-[#ff4500] text-black rounded-full transition-all">
-              Sign In (Mocked)
+              Sign In
             </button>
           </div>
         </div>
